@@ -16,4 +16,7 @@ func main() {
 
 	C := array.Zeros(10, 5)
 	fmt.Println(C)
+
+	D := array.Zeros(10, 1)
+	fmt.Println(D[0])
 }
