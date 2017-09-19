@@ -19,4 +19,11 @@ func main() {
 
 	D := array.Zeros(10, 1)
 	fmt.Println(D[0])
+
+	E := array.Zeros(2, 2)
+	E[0][0] = 1
+	E[0][1] = 2
+	E[1][0] = 3
+	E[1][1] = 4
+	fmt.Println(array.Det(E))
 }
