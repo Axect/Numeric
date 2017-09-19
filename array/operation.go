@@ -34,9 +34,7 @@ func AddConst(V Vector, x float64) Vector {
 
 // Add is Vector Vector operation
 func Add(V, W Vector) Vector {
-	if len(V) != len(W) {
-		log.Fatal("Length is not matched!")
-	}
+	LengthCheck(V, W)
 	X := make(Vector, len(V), len(V))
 	for i := range X {
 		X[i] = V[i] + W[i]
@@ -46,9 +44,7 @@ func Add(V, W Vector) Vector {
 
 // Sub is Vector Vector operation
 func Sub(V, W Vector) Vector {
-	if len(V) != len(W) {
-		log.Fatal("Length is not matched!")
-	}
+	LengthCheck(V, W)
 	X := make(Vector, len(V), len(V))
 	for i := range X {
 		X[i] = V[i] - W[i]
@@ -70,12 +66,27 @@ func DivisionConst(V Vector, s float64) Vector {
 
 // Mul is Vector Vector operation
 func Mul(V, W Vector) Vector {
-	if len(V) != len(W) {
-		log.Fatal("Length is not matched!")
-	}
+	LengthCheck(V, W)
 	X := make(Vector, len(V), len(V))
 	for i := range X {
 		X[i] = V[i] * W[i]
 	}
 	return X
+}
+
+// Inner is inner product
+func Inner(V, W Vector) float64 {
+	LengthCheck(V, W)
+	s := 0.
+	for i := range V {
+		s += V[i] * W[i]
+	}
+	return s
+}
+
+// LengthCheck generates error
+func LengthCheck(V, W Vector) {
+	if len(V) != len(W) {
+		log.Fatal("Length is not matched!")
+	}
 }
