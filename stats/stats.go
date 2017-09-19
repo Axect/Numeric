@@ -34,14 +34,10 @@ func Std(V Vector) float64 {
 	return math.Sqrt(v)
 }
 
-// CovMatirx is cov matrix
+// CovMatrix is cov matrix
 func CovMatrix(V, W Vector) Matrix {
 	x1, y2 := Var(V), Var(W)
-	mx, my := Mean(V), Mean(W)
-	X, Y := array.SubConst(V, mx), array.SubConst(W, my)
-	Z := array.Mul(X, Y)
-	S := array.Sum(Z)
-	x2 := S / float64(len(V)-1)
+	x2 := Cov(V, W)
 	y1 := x2
 	Result := Matrix{Vector{x1, x2}, Vector{y1, y2}}
 	return Result
