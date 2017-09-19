@@ -14,7 +14,7 @@ func Pow(V Vector, n float64) Vector {
 	return W
 }
 
-// Subtract is Vector scalar operation
+// SubConst is Vector scalar operation
 func SubConst(V Vector, x float64) Vector {
 	W := make(Vector, len(V), len(V))
 	for i := range W {
@@ -56,7 +56,7 @@ func Sub(V, W Vector) Vector {
 	return X
 }
 
-// Division is Vector Scalar operation
+// DivisionConst is Vector Scalar operation
 func DivisionConst(V Vector, s float64) Vector {
 	W := make(Vector, len(V), len(V))
 	if s == 0. {
