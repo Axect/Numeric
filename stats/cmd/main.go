@@ -11,9 +11,14 @@ import (
 type Vector = array.Vector
 
 func main() {
-	X := Vector{0., 2., 1., -3.}
-	Y := Vector{2., 5., 4., -1.}
-	fmt.Println(stats.Var(X), stats.Var(Y), stats.Cov(X, Y))
-	fmt.Println(stats.CovMatrix(X, Y))
-	fmt.Println(stats.Cor(X, Y))
+	X := stats.NormalDist(2, 1, 1000)
+	Y := stats.NormalDist(5, 3, 1000)
+	mx, my := stats.Mean(X), stats.Mean(Y)
+	sx, sy := stats.Std(X), stats.Std(Y)
+	C := stats.CovMatrix(X, Y)
+	R := stats.Cor(X, Y)
+	fmt.Println(mx, my)
+	fmt.Println(sx, sy)
+	fmt.Println(C)
+	fmt.Println(R)
 }
