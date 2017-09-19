@@ -2,6 +2,7 @@ package array
 
 // Vector is Type Alias in Go 1.9
 type Vector = []float64
+
 // Matrix is Type Alias
 type Matrix = []Vector
 
@@ -24,11 +25,7 @@ func Create(init, step, end float64) Vector {
 
 // Transpose transpose matrix
 func Transpose(A Matrix) Matrix {
-	Temp := make(Matrix, len(A[0]), len(A[0]))
-	// Make Space
-	for j := range Temp {
-		Temp[j] = make(Vector, len(A), len(A))
-	}
+	Temp := Zeros(len(A[0]), len(A))
 
 	// Transpose
 	for i := range A {
