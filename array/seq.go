@@ -19,3 +19,20 @@ func Create(init, step, end float64) Vector {
 	}
 	return A
 }
+
+// Transpose transpose matrix
+func Transpose(A [][]float64) [][]float64 {
+	Temp := make([][]float64, len(A[0]), len(A[0]))
+	// Make Space
+	for j := range Temp {
+		Temp[j] = make([]float64, len(A), len(A))
+	}
+
+	// Transpose
+	for i := range A {
+		for j := range A[i] {
+			Temp[j][i] = A[i][j]
+		}
+	}
+	return Temp
+}
