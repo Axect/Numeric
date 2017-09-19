@@ -5,6 +5,15 @@ import (
 	"math"
 )
 
+// Sum sums all
+func Sum(V Vector) float64 {
+	s := 0.
+	for _, elem := range V {
+		s += elem
+	}
+	return s
+}
+
 // Pow generate Powered Vector
 func Pow(V Vector, n float64) Vector {
 	W := make(Vector, len(V), len(V))
