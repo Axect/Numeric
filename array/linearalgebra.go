@@ -2,6 +2,7 @@ package array
 
 import (
 	"log"
+	"math"
 )
 
 // Transpose transpose matrix
@@ -61,9 +62,29 @@ func Minor(A Matrix, m, n int) Matrix {
 	return B
 }
 
+func Inverse(A Matrix) Matrix {
+	CheckInv(A)
+	B := Zeros(len(A), len(A[0]))
+	D := math.Abs(Det(A))
+	// Row
+	for i := range A {
+		for j := range A[i] {
+			B[i][j] = math.Pow(-1., float64(i+j+1)) / D * Det(Minor(A, j, i))
+		}
+	}
+	return B
+}
+
 // CheckSquare check square matrix
 func CheckSquare(A Matrix) {
 	if len(A) != len(A[0]) {
 		log.Fatal("Should input Square Matrix!")
+	}
+}
+
+// CheckInv check invertible
+func CheckInv(A Matrix) {
+	if Det(A) == 0 {
+		log.Fatal("Singular Matrix!")
 	}
 }

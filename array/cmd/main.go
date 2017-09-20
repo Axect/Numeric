@@ -19,4 +19,5 @@ func main() {
 	E[1][0] = 3
 	E[1][1] = 4
 	fmt.Println(array.Det(E))
+	fmt.Println(array.Inverse(E))
 }
