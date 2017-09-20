@@ -4,29 +4,6 @@ import (
 	"log"
 )
 
-// Vector is Type Alias in Go 1.9
-type Vector = []float64
-
-// Matrix is Type Alias
-type Matrix = []Vector
-
-// Create generates arithmetic Sequence
-func Create(init, step, end float64) Vector {
-	Length := int((end - init + 1.) / step)
-	A := make(Vector, Length, Length)
-	s := init
-	for i := range A {
-		switch i {
-		case 0:
-			A[i] = s
-		default:
-			s += step
-			A[i] = s
-		}
-	}
-	return A
-}
-
 // Transpose transpose matrix
 func Transpose(A Matrix) Matrix {
 	Temp := Zeros(len(A[0]), len(A))
@@ -50,7 +27,7 @@ func Det(A Matrix) float64 {
 	}
 	s := 0.
 	for i := range Core {
-		B := Smallize(A, 0, i)
+		B := Minor(A, 0, i)
 		switch {
 		case i%2 == 0:
 			s += Core[i] * Det(B)
@@ -61,8 +38,8 @@ func Det(A Matrix) float64 {
 	return s
 }
 
-// Smallize makes smaller matrix
-func Smallize(A Matrix, m, n int) Matrix {
+// Minor makes smaller matrix
+func Minor(A Matrix, m, n int) Matrix {
 	if m >= len(A) || n >= len(A[0]) {
 		log.Fatal("No Proper Input")
 	}
