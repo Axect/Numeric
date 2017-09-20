@@ -62,12 +62,15 @@ func Minor(A Matrix, m, n int) Matrix {
 	return B
 }
 
+// Inverse is just inverse
 func Inverse(A Matrix) Matrix {
+	// Error Check
 	CheckInv(A)
 	B := Zeros(len(A), len(A[0]))
 	D := math.Abs(Det(A))
 	// Row
 	for i := range A {
+		// Column
 		for j := range A[i] {
 			B[i][j] = math.Pow(-1., float64(i+j+1)) / D * Det(Minor(A, j, i))
 		}
