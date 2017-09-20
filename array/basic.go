@@ -1,5 +1,7 @@
 package array
 
+import "fmt"
+
 // Vector is Type Alias in Go 1.9
 type Vector = []float64
 
@@ -39,4 +41,20 @@ func Eyes(N int) Matrix {
 		I[i][i] = 1.
 	}
 	return I
+}
+
+// MatrixForm print matrix form
+func MatrixForm(A Matrix) {
+	for i := range A {
+		for j := range A[i] {
+			switch {
+			case j == len(A[i])-1:
+				fmt.Println(A[i][j], " |")
+			case j == 0:
+				fmt.Printf("| %v\t", A[i][j])
+			default:
+				fmt.Printf("%v\t", A[i][j])
+			}
+		}
+	}
 }

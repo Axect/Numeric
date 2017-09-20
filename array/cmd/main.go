@@ -18,6 +18,7 @@ func main() {
 	E[0][1] = 2
 	E[1][0] = 3
 	E[1][1] = 4
-	fmt.Println(array.Det(E))
-	fmt.Println(array.Inverse(E))
+	I := array.Inverse(E)
+	fmt.Println(I)
+	array.MatrixForm(I)
 }

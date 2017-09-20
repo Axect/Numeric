@@ -19,6 +19,6 @@ func main() {
 	R := stats.Cor(X, Y)
 	fmt.Println(mx, my)
 	fmt.Println(sx, sy)
-	fmt.Println(C)
+	array.MatrixForm(C)
 	fmt.Println(R)
 }

@@ -8,7 +8,6 @@ import (
 // Transpose transpose matrix
 func Transpose(A Matrix) Matrix {
 	Temp := Zeros(len(A[0]), len(A))
-
 	// Transpose
 	for i := range A {
 		for j := range A[i] {
