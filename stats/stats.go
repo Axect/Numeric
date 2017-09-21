@@ -2,8 +2,6 @@ package stats
 
 import (
 	"math"
-	"math/rand"
-	"time"
 
 	"github.com/Axect/Numeric/array"
 )
@@ -61,12 +59,8 @@ func Cor(V, W Vector) float64 {
 	return s2 / (sx * sy)
 }
 
-// NormalDist is Normal Distribution
-func NormalDist(m, sigma float64, N int) Vector {
-	V := make(Vector, N, N)
-	rand.Seed(int64(time.Now().Nanosecond()))
-	for i := range V {
-		V[i] = rand.NormFloat64()*sigma + m
-	}
-	return V
+// Moment is moment
+func Moment(V Vector, n float64) float64 {
+	W := array.Pow(V, n)
+	return Mean(W)
 }

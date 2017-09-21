@@ -11,14 +11,15 @@ import (
 type Vector = array.Vector
 
 func main() {
-	X := stats.NormalDist(2, 1, 1000)
-	Y := stats.NormalDist(5, 3, 1000)
-	mx, my := stats.Mean(X), stats.Mean(Y)
-	sx, sy := stats.Std(X), stats.Std(Y)
+	X := stats.NormalDist(2, 1, 100000)
+	Y := stats.NormalDist(5, 3, 100000)
 	C := stats.CovMatrix(X, Y)
 	R := stats.Cor(X, Y)
-	fmt.Println(mx, my)
-	fmt.Println(sx, sy)
 	array.MatrixForm(C)
 	fmt.Println(R)
+
+	D := stats.BinormialDist(1000, 1/6, 1000)
+	m := stats.Mean(D)
+	std := stats.Std(D)
+	fmt.Println(m, std)
 }
