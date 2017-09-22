@@ -5,6 +5,10 @@ import (
 	"math"
 )
 
+// =============================================================================
+// Linear Algebra
+// =============================================================================
+
 // Transpose transpose matrix
 func Transpose(A Matrix) Matrix {
 	Temp := Zeros(len(A[0]), len(A))
@@ -76,6 +80,10 @@ func Inverse(A Matrix) Matrix {
 	}
 	return B
 }
+
+// =============================================================================
+// Error Check
+// =============================================================================
 
 // CheckSquare check square matrix
 func CheckSquare(A Matrix) {

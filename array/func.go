@@ -2,6 +2,10 @@ package array
 
 import "math"
 
+// =============================================================================
+// Vector Function
+// =============================================================================
+
 // Pow generate Powered Vector
 func Pow(V Vector, n float64) Vector {
 	W := make(Vector, len(V), len(V))
