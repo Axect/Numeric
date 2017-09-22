@@ -1,4 +1,4 @@
-package Lagrange
+package lagrange
 
 import (
 	"log"
