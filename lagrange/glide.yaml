@@ -1,5 +1,0 @@
-package: github.com/Axect/Numeric/lagrange
-import:
-- package: github.com/Axect/Numeric
-  subpackages:
-  - array

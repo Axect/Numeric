@@ -1,25 +1,31 @@
 package spline
 
 import (
-	"github.com/Axect/Go/Package/Numeric/matrix"
+	"github.com/Axect/Numeric/array"
 )
+
+// Vector is type alias
+type Vector = []float64
+
+// Matrix is type alias
+type Matrix []Vector
 
 // Cubic is a cubic-spline interpolant.
 type Cubic struct {
-	nodes   []float64
-	weights []float64
+	nodes   Vector
+	weights Vector
 }
 
 // NewCubic constructs a cubic-spline interpolant for a function y = f(x) given
 // as a series of points (x, y). The x coordinates should be a strictly
 // increasing sequence with at least two elements. The corresponding y
 // coordinates can be multidimensional.
-func NewCubic(x, y []float64) *Cubic {
+func NewCubic(x, y Vector) *Cubic {
 	nn := len(x)
 	nd := len(y) / nn
 
-	dx := make([]float64, nn-1)
-	dydx := make([]float64, (nn-1)*nd)
+	dx := make(Vector, nn-1)
+	dydx := make(Vector, (nn-1)*nd)
 	for i := 0; i < (nn - 1); i++ {
 		dx[i] = x[i+1] - x[i]
 		for j := 0; j < nd; j++ {
@@ -31,15 +37,15 @@ func NewCubic(x, y []float64) *Cubic {
 
 	switch nn {
 	case 2:
-		s.nodes = []float64{x[0], x[1]}
-		s.weights = make([]float64, nd*4)
+		s.nodes = Vector{x[0], x[1]}
+		s.weights = make(Vector, nd*4)
 		for j := 0; j < nd; j++ {
 			s.weights[j*4+2] = dydx[j]
 			s.weights[j*4+3] = y[j]
 		}
 	case 3:
-		s.nodes = []float64{x[0], x[2]}
-		s.weights = make([]float64, nd*4)
+		s.nodes = Vector{x[0], x[2]}
+		s.weights = make(Vector, nd*4)
 		for j := 0; j < nd; j++ {
 			c1 := (dydx[nd+j] - dydx[j]) / (x[2] - x[0])
 			s.weights[j*4+1] = c1
@@ -50,26 +56,26 @@ func NewCubic(x, y []float64) *Cubic {
 		xb := x[2] - x[0]
 		xe := x[nn-1] - x[nn-3]
 
-		a := make([]float64, nn)
+		a := make(Vector, nn)
 		for i := 0; i < (nn - 2); i++ {
 			a[i] = dx[i+1]
 		}
 		a[nn-2] = xe
 
-		b := make([]float64, nn)
+		b := make(Vector, nn)
 		b[0] = dx[1]
 		for i := 1; i < (nn - 1); i++ {
 			b[i] = 2 * (dx[i] + dx[i-1])
 		}
 		b[nn-1] = dx[nn-3]
 
-		c := make([]float64, nn)
+		c := make(Vector, nn)
 		c[1] = xb
 		for i := 2; i < nn; i++ {
 			c[i] = dx[i-2]
 		}
 
-		d := make([]float64, nd*nn)
+		d := make(Vector, nd*nn)
 		for j := 0; j < nd; j++ {
 			d[j*nn] = ((dx[0]+2*xb)*dx[1]*dydx[j] + dx[0]*dx[0]*dydx[nd+j]) / xb
 			for i := 1; i < (nn - 1); i++ {
@@ -79,12 +85,12 @@ func NewCubic(x, y []float64) *Cubic {
 				(2*xe+dx[nn-2])*dx[nn-3]*dydx[(nn-2)*nd+j]) / xe
 		}
 
-		slopes := matrix.Tridiagonal(a, b, c, d)
+		slopes := array.Tridiagonal(a, b, c, d)
 
-		s.nodes = make([]float64, nn)
+		s.nodes = make(Vector, nn)
 		copy(s.nodes, x)
 
-		s.weights = make([]float64, (nn-1)*nd*4)
+		s.weights = make(Vector, (nn-1)*nd*4)
 		for i, k := 0, 0; i < (nn - 1); i++ {
 			for j := 0; j < nd; j++ {
 				α := (dydx[i*nd+j] - slopes[j*nn+i]) / dx[i]
@@ -104,11 +110,11 @@ func NewCubic(x, y []float64) *Cubic {
 // Evaluate interpolates the function values y = f(x). The x coordinates should
 // be an increasing sequence whose elements belong to the range of the points
 // that the interpolant has been constructed with.
-func (s *Cubic) Evaluate(x []float64) []float64 {
+func (s *Cubic) Evaluate(x Vector) Vector {
 	nn, np := len(s.nodes), len(x)
 	nd := len(s.weights) / (4 * (nn - 1))
 
-	y := make([]float64, np*nd)
+	y := make(Vector, np*nd)
 
 	for i, l := 0, 0; i < np; i++ {
 		for x[i] > s.nodes[l+1] && l < (nn-2) {
@@ -136,11 +142,11 @@ func (s *Cubic) Evaluate(x []float64) []float64 {
 
 // type Normal func(float64) float64
 
-// func Cubic(X, Y []float64) Normal {
-// 	A := make([]float64, len(X)-1, len(X)-1)
-// 	B := make([]float64, len(A), len(A))
-// 	C := make([]float64, len(A), len(A))
-// 	D := make([]float64, len(A), len(A))
+// func Cubic(X, Y Vector) Normal {
+// 	A := make(Vector, len(X)-1, len(X)-1)
+// 	B := make(Vector, len(A), len(A))
+// 	C := make(Vector, len(A), len(A))
+// 	D := make(Vector, len(A), len(A))
 // 	for i := 1; i < len(A); i++ {
 // 		A[i] = X[i] - X[i-1]
 // 		B[i] = X[i+1] - X[i-1]
@@ -150,8 +156,8 @@ func (s *Cubic) Evaluate(x []float64) []float64 {
 
 // 	Ap, Bp, Cp, Dp := A[1:], B[1:], C[1:], D[1:]
 // 	Temp := matrix.Tridiagonal(Ap, Bp, Cp, Dp)
-// 	Temp2 := append(Temp, []float64{0.}...)
-// 	Fpp := append([]float64{0.}, Temp2...)
+// 	Temp2 := append(Temp, Vector{0.}...)
+// 	Fpp := append(Vector{0.}, Temp2...)
 
 // 	S := func(x float64) float64 {
 // 		key := false

@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/Axect/Go/Numerical/spline"
-	"github.com/Axect/Go/Package/csv"
+	"github.com/Axect/Numeric/spline"
+	"github.com/Axect/csv"
 )
 
 func main() {
