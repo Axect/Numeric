@@ -22,6 +22,7 @@ setattr(P, "label", "Point")
 lgnd = Legend(.1, .9, [C, P])
 add(p, C, lgnd)
 add(p, P)
-savefig(p, "Fig/lagrange.svg", (1000,600))
+savefig(p, "Fig/lagrange.svg", (1000,800))
 
 run(`inkscape -z Fig/lagrange.svg -e Fig/lagrange.png -d 300 --export-background=WHITE`)
+run(`rm Fig/lagrange.svg`)

@@ -1,0 +1,11 @@
+hash: ebc9fffc2d49f0d6e54121bb3040fdbecd603d38cbb8a394a150f13145f83e93
+updated: 2017-09-22T22:51:14.64619008+09:00
+imports:
+- name: github.com/Axect/csv
+  version: ba84b9aaca2b422a7e2d952d8e6e4350015f2ecb
+- name: github.com/Axect/Numeric
+  version: fc2d1aca5961e85f1ee9bd39236a69927fa8fa96
+  subpackages:
+  - array
+  - lagrange
+testImports: []
