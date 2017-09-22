@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Axect/Go/Advanced/Polynomial"
+	"github.com/Axect/Numeric/Polynomial"
 )
 
 func main() {
