@@ -37,3 +37,12 @@ func Tan(V Vector) Vector {
 	}
 	return W
 }
+
+// Exp generate Exp Vector
+func Exp(V Vector) Vector {
+	W := make(Vector, len(V), len(V))
+	for i := range V {
+		W[i] = math.Exp(V[i])
+	}
+	return W
+}
