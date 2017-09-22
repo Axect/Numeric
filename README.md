@@ -31,9 +31,14 @@ func main() {
 Array has some vector operations.
 
 * Create (Vector)
-* Transpose (Matrix)
 * Zeros (Matrix)
 * Eyes (Matrix)
+* MatrixForm
+* Float2Int
+* Transpose (Matrix)
+* Det
+* Minor
+* Inverse
 * Sum
 * Pow
 * Sub
