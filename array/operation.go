@@ -99,3 +99,12 @@ func LengthCheck(V, W Vector) {
 		log.Fatal("Length is not matched!")
 	}
 }
+
+// Product products array
+func Product(V Vector) float64 {
+	p := 1.
+	for i := range V {
+		p *= V[i]
+	}
+	return p
+}
