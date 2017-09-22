@@ -53,12 +53,18 @@ Array has some vector operations.
 
 ## 2. Stats
 
-Stats has statistics functions
+Stats has Probability & Statistics functions
 
+* Factorial
+* Perm
+* Comb
+* Homonomial
 * Mean
 * Var
 * Std
 * Cov
 * CovMatrix
 * Cor (Correlation Coefficient)
+* Moment
 * NormalDist
+* BinormialDist
