@@ -20,7 +20,7 @@ func main() {
 	Y := array.Sin(X)
 	// Spline
 	Sp := spline.NewCubic(X, Y)
-
+	// Evaluate
 	T := array.Create(0, .1, 40)
 	S := Sp.Evaluate(T)
 	Result := []Vector{T, S}
