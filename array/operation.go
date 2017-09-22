@@ -2,7 +2,6 @@ package array
 
 import (
 	"log"
-	"math"
 )
 
 // Sum sums all
@@ -12,15 +11,6 @@ func Sum(V Vector) float64 {
 		s += elem
 	}
 	return s
-}
-
-// Pow generate Powered Vector
-func Pow(V Vector, n float64) Vector {
-	W := make(Vector, len(V), len(V))
-	for i := range V {
-		W[i] = math.Pow(V[i], n)
-	}
-	return W
 }
 
 // SubConst is Vector scalar operation

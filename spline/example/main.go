@@ -2,24 +2,52 @@ package main
 
 import (
 	"fmt"
+	"os/exec"
+	"sync"
 
+	"github.com/Axect/Numeric/array"
 	"github.com/Axect/Numeric/spline"
-	"github.com/Axect/csv"
 )
 
+// Vector is alias
+type Vector = []float64
+
+var wg sync.WaitGroup
+
 func main() {
-	X := []float64{1., 2., 3., 4., 5.}
-	Y := []float64{1., 4., 9., 16., 25.}
+	// Create Array
+	X := array.Create(0, 1, 40)
+	Y := array.Sin(X)
+	// Spline
 	Sp := spline.NewCubic(X, Y)
 
-	T := make([]float64, 40, 40)
-	for i := 0; i < len(T); i++ {
-		T[i] = 1. + 0.1*float64(i)
-	}
+	T := array.Create(0, .1, 40)
 	S := Sp.Evaluate(T)
-	Temp := make([][]string, len(T), len(T))
-	for i := range T {
-		Temp[i] = []string{fmt.Sprint(T[i]), fmt.Sprint(S[i])}
+	Result := []Vector{T, S}
+	array.Write(Result, "Data/test.csv")
+	wg.Add(1)
+	go Routine()
+	wg.Wait()
+	fmt.Println()
+	fmt.Println("All Process Finished!")
+
+}
+
+// Routine for julia
+func Routine() {
+	defer wg.Done()
+
+	var (
+		cmdOut []byte
+		err    error
+	)
+
+	if cmdOut, err = exec.Command("julia", "plot.jl").Output(); err != nil {
+		panic(err)
 	}
-	csv.Write(Temp, "Data/Cubic.csv")
+	comp := string(cmdOut)
+	fmt.Println()
+	fmt.Println(comp)
+	fmt.Println("Plot Finished!")
+	return
 }
