@@ -8,7 +8,7 @@ type Vector = []float64
 // Matrix is Type Alias
 type Matrix = []Vector
 
-// Create generates arithmetic Sequence
+// Create generates uniform Sequence
 func Create(init, step, end float64) Vector {
 	Length := int((end-init)/step) + 1
 	A := make(Vector, Length, Length)
