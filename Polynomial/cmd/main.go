@@ -6,10 +6,13 @@ import (
 	"github.com/Axect/Numeric/Polynomial"
 )
 
+// Vector is type alias
+type Vector = []float64
+
 func main() {
 	var A, B Polynomial.Polynomial
-	A.Coeff = []float64{1, -2, 3, 4}
-	B.Coeff = []float64{2, 1}
+	A.Coeff = Vector{1, -2, 3, 4}
+	B.Coeff = Vector{2, 1}
 	C := Polynomial.Add(A, B)
 	D := Polynomial.Sub(A, B)
 	C.Show()
@@ -21,8 +24,8 @@ func main() {
 	fmt.Println()
 
 	var P, Q Polynomial.Polynomial
-	P.Coeff = []float64{1, 3, 3, 1}
-	Q.Coeff = []float64{1, 1}
+	P.Coeff = Vector{1, 3, 3, 1}
+	Q.Coeff = Vector{1, 1}
 	R, r := Polynomial.Honor(P, Q)
 	R.Show()
 	fmt.Println(r)
@@ -31,7 +34,7 @@ func main() {
 	fmt.Println()
 
 	var S Polynomial.Polynomial
-	S.Coeff = []float64{1, 2, 3, 4}
+	S.Coeff = Vector{1, 2, 3, 4}
 	F := S.PolyFunc()
 	S.Show()
 	fmt.Println(F(1))
