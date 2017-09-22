@@ -1,10 +1,10 @@
 package array
 
-// Float2Int converts []float64 to []int64
-func Float2Int(A []float64) []int64 {
-	B := make([]int64, len(A), len(A))
+// Float2Int converts []float64 to []int
+func Float2Int(A []float64) []int {
+	B := make([]int, len(A), len(A))
 	for i, elem := range A {
-		B[i] = int64(elem)
+		B[i] = int(elem)
 	}
 	return B
 }
