@@ -16,8 +16,8 @@ func NormalDist(m, sigma float64, N int) Vector {
 	return V
 }
 
-// BinormialDist is Binormial Distribution
-func BinormialDist(n, p float64, N int) Vector {
+// BinomialDist is Binomial Distribution
+func BinomialDist(n, p float64, N int) Vector {
 	m := n * p
 	std := math.Sqrt(n * p * (1 - p))
 	return NormalDist(m, std, N)
