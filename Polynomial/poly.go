@@ -11,7 +11,7 @@ import (
 
 // Polynomial is Polynomial
 type Polynomial struct {
-	Coeff []float64
+	Coeff Vector
 }
 
 // Vector is type alias
@@ -67,7 +67,7 @@ func (P Polynomial) Show() {
 func Minus(P Polynomial) Polynomial {
 	L := len(P.Coeff)
 	var Q Polynomial
-	Q.Coeff = make([]float64, L, L)
+	Q.Coeff = make(Vector, L, L)
 	for i := range Q.Coeff {
 		Q.Coeff[i] = -P.Coeff[i]
 	}
