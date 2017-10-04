@@ -18,8 +18,6 @@ func main() {
 	array.MatrixForm(C)
 	fmt.Println(R)
 
-	D := stats.BinormialDist(1000, 1/6, 1000)
-	m := stats.Mean(D)
-	std := stats.Std(D)
-	fmt.Println(m, std)
+	D := stats.Binomial(10, 1./5)
+	fmt.Println(D(1))
 }
