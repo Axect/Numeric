@@ -3,21 +3,21 @@ package main
 import (
 	"fmt"
 
-	"github.com/Axect/Numeric/array"
-	"github.com/Axect/Numeric/stats"
+	ar "github.com/Axect/Numeric/array"
+	ss "github.com/Axect/Numeric/stats"
 )
 
 // Vector is type alias
-type Vector = array.Vector
+type Vector = ar.Vector
 
 func main() {
-	X := stats.NormalDist(2, 1, 100000)
-	Y := stats.NormalDist(5, 3, 100000)
-	C := stats.CovMatrix(X, Y)
-	R := stats.Cor(X, Y)
-	array.MatrixForm(C)
+	X := ss.NormalDist(2, 1, 100000)
+	Y := ss.NormalDist(5, 3, 100000)
+	C := ss.CovMatrix(X, Y)
+	R := ss.Cor(X, Y)
+	ar.MatrixForm(C)
 	fmt.Println(R)
 
-	D := stats.Binomial(10, 1./5)
+	D := ss.Binomial(10, 1./5)
 	fmt.Println(D(1))
 }
