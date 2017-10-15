@@ -45,15 +45,16 @@ func Eyes(N int) Matrix {
 
 // MatrixForm print matrix form
 func MatrixForm(A Matrix) {
+	l := len(fmt.Sprint(A[0][0]))
 	for i := range A {
 		for j := range A[i] {
 			switch {
 			case j == len(A[i])-1:
-				fmt.Println(A[i][j], " |")
+				fmt.Printf("%*v ]\n", l, A[i][j])
 			case j == 0:
-				fmt.Printf("| %v\t", A[i][j])
+				fmt.Printf("[ %*v ", l, A[i][j])
 			default:
-				fmt.Printf("%v\t", A[i][j])
+				fmt.Printf("%*v ", l, A[i][j])
 			}
 		}
 	}
