@@ -5,8 +5,8 @@ import (
 	"math"
 )
 
-// Honor represents Honor's Algorithm
-func Honor(P, Q Polynomial) (Polynomial, float64) {
+// Horner represents Horner's Algorithm
+func Horner(P, Q Polynomial) (Polynomial, float64) {
 	if len(Q.Coeff) != 2 {
 		log.Fatal("Just put linear polynomial")
 	}
